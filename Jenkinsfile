@@ -14,8 +14,10 @@ pipeline {
 		}
 	}	
 	post {
-		success {
-			dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-		}
+	    always {
+            // Publish the OWASP Dependency-Check report
+            step([$class: 'DependencyCheckPublisher', pattern: '**/dependency-check-report.xml'])
+        }
+
 	}
 }
